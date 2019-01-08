@@ -1,0 +1,23 @@
+---
+- name: Purge des application à installer via Brew
+  hosts: "{{ host_group }}"
+  gather_facts: no
+  tasks:
+          - name:  Suppression des applications via le module file. 
+            file:
+                    path:   "/Applications/{{ item }}.app"
+                    state:  absent
+            become:     yes
+            with_items:
+                  - Adobe acrobat reader DC
+                  - Elmedia player
+                  - Alfred 3
+                  - Firefox
+                  - Geogebra classic 6
+                  - Google chrome
+                  - Gimp
+                  - Keka
+                  - LibreOffice
+                  - VLC
+                  - Wineskin Winery
+...

@@ -1,0 +1,28 @@
+#########################################################
+#   Installation des nouveaux mac os reçu sur le parc   #
+#   On installe et configure tout                       #
+#   1 . Déployer de la clé SSH                          #
+#   2 . Vérrouiller le wi-fi                            #
+#   3 . Installer Brew                                  #
+#   4 . Purger les applications à installer avec Brew   #
+#   5 . Installer les applications à l'aide de Brew     #
+#########################################################
+
+###############################################################################################################
+#                                   COMMANDE A EXECUTER POUR JOUER LE RÔLE                                    #
+#                    ----------------------------------------------------------------------                   #
+# ==> ansible-playbook main.yml -u user --ask-pass -K --extra-vars "host_group=host, ssh_user=user"           #
+###############################################################################################################
+
+---
+- name: Installation de nouveau(x) postes Mac
+  hosts: "{{ host_group }}"
+  tasks:
+      - include: deploy_ssh.yml
+      - include: lock_wifi.yml
+      - name: Exec du rôle de Geerling Guy 
+        include_role: 
+          name: geerlingguy.homebrew
+- import_playbook: delete_apps.yml
+- import_playbook: install_apps.yml
+...

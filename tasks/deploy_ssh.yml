@@ -1,0 +1,18 @@
+
+##############################################################################################################
+# Deploiement des clés SSH dans le home des users distants                                                   #
+# Lancer la commande suivante pour executer le playbook                                                      #
+#                                                                                                            #
+# ==> ansible-playbook deploy_ssh.yml -u user --ask-pass -K --extra-vars "host_group=host, ssh_user=user"    #
+##############################################################################################################
+
+# - name: Configuring ssh-keys files
+#   hosts: "{{ host_group }}"
+#   become: yes       # On veut devenir root
+#   tasks:
+          - name: Copying public key as authorized key on remote host(s)
+            become: yes
+            authorized_key:
+                user: "{{ ssh_user }}"
+#                key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+                key: "{{ lookup('file', '../files/id_rsa.pub') }}"

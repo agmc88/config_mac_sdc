@@ -1,0 +1,7 @@
+# - name: Configuring wifi settings
+#   hosts: "{{ host_group }}"
+#   become: yes       # become root
+#   tasks:
+      - name: Configuration du wifi
+        script: ../files/config_wifi.sh
+        become: yes

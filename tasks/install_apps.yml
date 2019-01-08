@@ -1,0 +1,69 @@
+#####################################################################################
+#                                                                                   #
+#   Executer le playbook avec la commande suivante :                                #
+#   ________________________________________________                                #
+#                                                                                   #
+#   ansible-playbook installApps.yml -u user --extra-vars "host_var=hostGrp" -K     #
+#                                                                                   #
+#####################################################################################
+
+---
+- name: Installation de plusieurs logiciels 
+  hosts: "{{ host_group }}"
+  tasks:
+
+        - name: HomeBrew Tap
+          homebrew_tap:
+               name: homebrew/cask
+               state: present
+
+       #- name: Installation des plugins.
+          #homebrew_cask:
+          #    name: "{{ item }}"
+          #    state: present
+          #    install_options: force
+          #    update_homebrew: yes
+          #with_items:
+                  #- adobe-air
+                  #- flash-player-debugger-npapi
+                  #- flash-player-debugger-ppapi
+                  #- flash-player
+
+        - name: Installation des Applications.
+          homebrew_cask:
+                name:               "{{ item }}"
+                state:              present
+                install_options:    "appdir=/Applications"
+                update_homebrew:    yes
+                upgrade_all:        false
+          with_items:
+                  - alfred
+                  - firefox
+                  - geogebra
+                  - google-chrome
+                  - keka
+                  - libreoffice
+                  - libreoffice-language-pack
+                  - vlc
+                  - wineskin-winery
+
+#############################################################################
+#   On autorise les applications pour supprimer le message d'avertissement  #
+#############################################################################
+        - name:     Autorisation des applications dans le system (suppression de la popup).
+          command:  xattr -dr com.apple.quarantine "/Applications/{{item}}.app"
+          become:   yes
+          with_items:
+                  - alfred 3
+                  - firefox
+                  - geogebra classic 6
+                  - google chrome
+                  - keka
+                  - libreoffice
+                  - vlc
+                  - wineskin winery
+
+        #- name: Activation des parametres WiFi.
+        #  script: ../files/config_wifi.sh
+        # - include: ./inc_config_wifi.yml
+...
