@@ -19,6 +19,8 @@ before_install:
 
 install:
         - pip install ansible
+        - ansible-galaxy install elliotweiser.osx-command-line-tools
+        - ansible-galaxy install geerlingguy.homebrew
 
 script:
         - ansible-playbook tasks/main.yml -u test --become --extra-vars "host_group=localhost ssh_user=test" --syntax-check
