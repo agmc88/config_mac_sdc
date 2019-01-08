@@ -14,10 +14,7 @@ before_install:
         - sudo dscl . -create /Users/test gid 300
         - sudo dscl . -create /Users/test UserShell /bin/bash
         - sudo dscl . -create /Users/test NFSHomeDirectory /Users/test
-        - sleep 1
-        - pwd
-        - ls
-        - sleep 1
+        - sudo mkdir -p /Users/test/.ssh
         - sudo ssh-keygen -t rsa -f ./files/id_rsa -P ""
 
 install:
