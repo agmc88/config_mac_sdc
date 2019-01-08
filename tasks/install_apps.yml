@@ -16,6 +16,7 @@
           homebrew_tap:
                name: homebrew/cask
                state: present
+               ignore_error: true
 
        #- name: Installation des plugins.
           #homebrew_cask:
