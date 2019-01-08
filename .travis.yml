@@ -16,6 +16,7 @@ before_install:
         - sudo dscl . -create /Users/test NFSHomeDirectory /Users/test
         - sudo mkdir -p /Users/test/.ssh
         - sudo ssh-keygen -t rsa -f ./files/id_rsa -P ""
+        - sudo whereis xattr
 
 install:
         - pip install ansible
