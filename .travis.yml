@@ -18,7 +18,7 @@ before_install:
         - pwd
         - ls
         - sleep 1
-        - sudo ssh-keygen -t rsa -f ./files/id_rsa.pub -P ""
+        - sudo ssh-keygen -t rsa -f ./files/id_rsa -P ""
 
 install:
         - pip install ansible
