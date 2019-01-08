@@ -55,14 +55,14 @@
           command:  /usr/bin/xattr -dr com.apple.quarantine "/Applications/{{item}}.app"
           become:   yes
           with_items:
-                  - alfred 3
-                  - firefox
-                  - geogebra classic 6
-                  - google chrome
-                  - keka
-                  - libreoffice
-                  - vlc
-                  - wineskin winery
+                  - Alfred 3
+                  - Firefox
+                  - Geogebra classic 6
+                  - Google chrome
+                  - Keka
+                  - LibreOffice
+                  - VLC
+                  - Wineskin Winery
 
         #- name: Activation des parametres WiFi.
         #  script: ../files/config_wifi.sh
