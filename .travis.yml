@@ -25,5 +25,5 @@ install:
 
 script:
         - ansible-playbook tasks/main.yml -u test --become --extra-vars "host_group=localhost ssh_user=test" --syntax-check
-        - ansible-playbook tasks/main.yml --connection=local --become -e "host_group=localhost, ssh_user=test" 
+        - ansible-playbook tasks/main.yml --connection=local --become -e "host_group=localhost, ssh_user=test"  -vvvv
 ...
