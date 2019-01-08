@@ -52,7 +52,7 @@
 #   On autorise les applications pour supprimer le message d'avertissement  #
 #############################################################################
         - name:     Autorisation des applications dans le system (suppression de la popup).
-          command:  xattr -dr com.apple.quarantine "/Applications/{{item}}.app"
+          command:  /usr/bin/xattr -dr com.apple.quarantine "/Applications/{{item}}.app"
           become:   yes
           with_items:
                   - alfred 3
