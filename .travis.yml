@@ -1,0 +1,28 @@
+---
+language: objective-c
+
+os: osx
+
+image_osx: xcode10.1
+
+before_install:
+        - sudo dscl . -create /Groups/test gid 300
+        - sudo dscl . -create /Groups/test RealName "Groupe test"
+        - sudo dscl . -create /Groups/test passwd "*"
+
+        - sudo dscl . -create /Users/test uid 300
+        - sudo dscl . -create /Users/test gid 300
+        - sudo dscl . -create /Users/test UserShell /bin/bash
+        - sudo dscl . -create /Users/test NFSHomeDirectory /Users/test
+
+        - sudo ssh-keygen -t rsa -f files/id_rsa.pub -P ""
+
+install:
+        - pip install ansible
+
+script:
+        - ansible-playbook tasks/main.yml -u test --become --extra-vars "host_group=localhost ssh_user=test" --syntax-check
+        - ansible-playbook tasks/main.yml --connection=local --become -e "host_group=localhost, ssh_user=test"
+
+          #test 
+...
